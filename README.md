@@ -11,8 +11,15 @@ some [ComfyUI](https://github.com/comfyanonymous/ComfyUI) custom nodes implement
 git clone https://github.com/vvip2u/ComfyUI-JK-Nodes.git
 ```
 
-2 - Copy folder
+2 - Copy folder（复制文件夹）
 put the folder to your project's `custom_nodes` folder.
+
+
+3 - Install Dependencies（安装依赖）
+```
+cd {comfyui_install_path}/custom_codes/ComfyUI-JK-Nodes
+pip install -r requirements.txt
+```
 
 ### Usage（使用）
 - AddWatermark（添加水印）

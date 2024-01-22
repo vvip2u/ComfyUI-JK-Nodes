@@ -4,7 +4,7 @@
 from matplotlib import font_manager
 import os
 from fontTools.ttLib import TTFont
-from PIL import Image, ImageDraw, ImageFont
+from PIL import ImageDraw, ImageFont
 import torchvision.transforms.functional as F
 
 class ColorMap:
@@ -111,7 +111,7 @@ class AddWatermark:
             "required":
                 {
                     "images": ("IMAGE", ),
-                    "enable": ("BOOLEAN", {"default": True, "label_on": "True", "label_off": "False"}),
+                    # "enable": ("BOOLEAN", {"default": True, "label_on": "True", "label_off": "False"}),
                     "text": (
                         "STRING", {"default": "瑆皓科技"}
                     ),
@@ -148,7 +148,8 @@ class AddWatermark:
     CATEGORY = "JK Nodes/addWatermark"
 
     # TODO: 后续支持字符之间的间距以及垂直排列
-    def add_watermark(self, images, enable, text, position, save_dir_path, filename_prefix, font, font_size, text_color, letter_spacing, direction):
+    def add_watermark(self, images, text, position, save_dir_path, filename_prefix, font, font_size, text_color, letter_spacing, direction):
+
         # 打开原始图片
         print('start add watermark')
 
@@ -177,7 +178,7 @@ class AddWatermark:
             # 获取图片大小
             _, image_height, image_width = original_image.shape
 
-            left, top = calc_position(position, image_width, image_height, text, font_size, letter_spacing)
+            left, top = calc_position(position, image_width, image_height, text, font_size)
 
             color = color_map.get_value(text_color)
 
@@ -185,6 +186,7 @@ class AddWatermark:
             image_width: {image_width}
             image_height: {image_height}
             position: {position}
+            direction: {direction}
             text: {text}
             font: {font}
             font_size: {font_size}
@@ -218,7 +220,7 @@ class AddWatermark:
 
         return (images,)
 
-def calc_position(position, image_width, image_height, text, font_size, letter_spacing):
+def calc_position(position, image_width, image_height, text, font_size):
     length = len(text)
 
     left = 20

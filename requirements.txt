@@ -1,0 +1,6 @@
+numpy
+Pillow
+onnx
+onnxruntime
+opencv-python
+pyexiftool
